@@ -1,14 +1,11 @@
 //
-//  Color.swift
-//  Week1_Practice
+//  UIColor+.swift
+//  TVING
 //
-//  Created by YOUJIM on 4/4/24.
+//  Created by YOUJIM on 4/16/24.
 //
 
 import UIKit
-
-
-
 
 
 extension UIColor {

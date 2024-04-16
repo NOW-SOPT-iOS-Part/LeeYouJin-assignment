@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(windowScene: windowScene)
         
         // 2. LoginViewController를 rootViewController로 하는 NavigationController를 window의 rootViewController로 설정
-        let navigationController = UINavigationController(rootViewController: ViewController())
+        let navigationController = UINavigationController(rootViewController: LoginViewController())
         self.window?.rootViewController = navigationController
         
         // 3. window가 여러 개 존재할 때 가장 앞에 있는 window를 key window로 지정하는 함수 .makeKeyAndVisible() 호출

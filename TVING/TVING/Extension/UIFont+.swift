@@ -1,10 +1,9 @@
 //
-//  Font.swift
-//  Week1_Practice
+//  UIFont+.swift
+//  TVING
 //
-//  Created by YOUJIM on 4/4/24.
+//  Created by YOUJIM on 4/16/24.
 //
-
 
 import UIKit
 
@@ -13,6 +12,8 @@ enum FontName: String {
     case pretendardExtraBold = "Pretendard-ExtraBold"
     case pretendardBold = "Pretendard-Bold"
     case pretendardSemiBold = "Pretendard-SemiBold"
+    case pretendardMedium = "Pretendard-Medium"
+    case pretendardRegular = "Pretendard-Regular"
 }
 
 extension UIFont {
