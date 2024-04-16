@@ -53,7 +53,7 @@ final class LoginViewController: UIViewController {
         $0.titleLabel?.font = UIFont.font(.pretendardSemiBold, ofSize: 14)
         $0.layer.cornerRadius = 4
         $0.layer.borderWidth = 1
-        $0.isEnabled = true
+        $0.isEnabled = false
         $0.setTitleColor(.Gray02, for: .disabled)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = $0.isEnabled ? .accent : .black
@@ -169,6 +169,20 @@ final class LoginViewController: UIViewController {
         }
     }
     
+
+    public func changeLoginButton() {
+        if !isFieldsEmpty() {
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = .accent
+            loginButton.layer.borderColor = UIColor.clear.cgColor
+        }
+        else {
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = .black
+            loginButton.layer.borderColor = UIColor.Gray02?.cgColor
+        }
+    }
+    
     private func isFieldsEmpty() -> Bool {
         if idTextField.hasText && passwordTextField.hasText { return false }
         
@@ -187,6 +201,10 @@ extension LoginViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.clear.cgColor
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        self.changeLoginButton()
     }
 }
 
