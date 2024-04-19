@@ -27,6 +27,7 @@
 		DD02DBAC2BCE640A008ACD16 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02DBAA2BCE640A008ACD16 /* UIColor+.swift */; };
 		DD02DBAE2BCE7A43008ACD16 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02DBAD2BCE7A43008ACD16 /* UIButton+.swift */; };
 		DD02DBB02BCE9564008ACD16 /* UIControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02DBAF2BCE9564008ACD16 /* UIControl+.swift */; };
+		DD02DBB22BCEA936008ACD16 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02DBB12BCEA936008ACD16 /* WelcomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		DD02DBAA2BCE640A008ACD16 /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		DD02DBAD2BCE7A43008ACD16 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		DD02DBAF2BCE9564008ACD16 /* UIControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+.swift"; sourceTree = "<group>"; };
+		DD02DBB12BCEA936008ACD16 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,11 +86,12 @@
 		DD02DB7A2BCE627A008ACD16 /* TVING */ = {
 			isa = PBXGroup;
 			children = (
-				DD02DBA82BCE640A008ACD16 /* Extension */,
-				DD02DB952BCE6404008ACD16 /* Fonts */,
 				DD02DB7B2BCE627A008ACD16 /* AppDelegate.swift */,
 				DD02DB7D2BCE627A008ACD16 /* SceneDelegate.swift */,
+				DD02DBA82BCE640A008ACD16 /* Extension */,
+				DD02DB952BCE6404008ACD16 /* Fonts */,
 				DD02DB7F2BCE627A008ACD16 /* LoginViewController.swift */,
+				DD02DBB12BCEA936008ACD16 /* WelcomeViewController.swift */,
 				DD02DB842BCE627B008ACD16 /* Assets.xcassets */,
 				DD02DB862BCE627B008ACD16 /* LaunchScreen.storyboard */,
 				DD02DB892BCE627B008ACD16 /* Info.plist */,
@@ -211,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD02DBAB2BCE640A008ACD16 /* UIFont+.swift in Sources */,
+				DD02DBB22BCEA936008ACD16 /* WelcomeViewController.swift in Sources */,
 				DD02DBAE2BCE7A43008ACD16 /* UIButton+.swift in Sources */,
 				DD02DB802BCE627A008ACD16 /* LoginViewController.swift in Sources */,
 				DD02DBB02BCE9564008ACD16 /* UIControl+.swift in Sources */,
