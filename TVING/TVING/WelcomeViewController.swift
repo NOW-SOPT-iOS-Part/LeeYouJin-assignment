@@ -28,6 +28,7 @@ final class WelcomeViewController: UIViewController {
         $0.textColor = .Gray01
         $0.font = UIFont.font(.pretendardBold, ofSize: 23)
         $0.numberOfLines = 0
+        $0.textAlignment = .center
     }
     
     private lazy var mainButton: UIButton = UIButton().then {
@@ -35,6 +36,7 @@ final class WelcomeViewController: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = .accent
         $0.layer.cornerRadius = 3
+        $0.addTarget(self, action: #selector(didMainButtonTapped), for: .touchUpInside)
     }
     
     
@@ -75,5 +77,31 @@ final class WelcomeViewController: UIViewController {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(52)
         }
+    }
+    
+    public func receivedData() {
+        NotificationCenter.default.addObserver(
+            forName: NSNotification.Name("id"),
+            object: nil,
+            queue: nil) { result in
+                let id = result.object as! String
+                print("killkill")
+                self.welcomeLabel.text = "\(id)님\n 반가워요!"
+        }
+    }
+    
+    @objc
+    private func dataReceived(_ notification: Notification) {
+        print("전송완")
+        if let id = notification.object as? String {
+            welcomeLabel.text = "\(id)님\n 반가워요!"
+            print("적용완")
+        }
+        
+    }
+    
+    @objc
+    private func didMainButtonTapped() {
+        self.dismiss(animated: true)
     }
 }

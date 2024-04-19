@@ -13,6 +13,13 @@ import Then
 final class LoginViewController: UIViewController {
     
     
+    // MARK: - Variables
+    
+    typealias handler = ((String) -> (Void))
+    
+    var completionHandler: handler?
+    
+    
     // MARK: - Components
     
     private let loginLabel: UILabel = UILabel().then {
@@ -240,7 +247,20 @@ final class LoginViewController: UIViewController {
     
     @objc
     private func didLoginButtonTapped() {
-        // TODO: 데이터 전송
+        let welcomeVC = WelcomeViewController()
+        
+        // WelcomeVC에서 NotificationCenter로 id 데이터 받을 옵저버 등록
+        welcomeVC.receivedData()
+        
+        // NotificationCenter로 id 데이터 post
+        NotificationCenter.default.post(
+            name: NSNotification.Name("id"),
+            object: idTextField.text
+        )
+        
+        welcomeVC.modalPresentationStyle = .fullScreen
+        
+        self.present(welcomeVC, animated: true)
     }
     
     // idTextField 클리어하는 함수
