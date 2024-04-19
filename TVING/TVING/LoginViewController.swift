@@ -243,14 +243,16 @@ final class LoginViewController: UIViewController {
         // TODO: 데이터 전송
     }
     
+    // idTextField 클리어하는 함수
     @objc
     private func didIdClearButtonTapped() {
-        
+        idTextField.text = ""
     }
     
+    // passwordTextField 클리어하는 함수
     @objc
     private func didPasswordClearButtonTapped() {
-        
+        passwordTextField.text = ""
     }
     
     // 비밀번호 마스킹 상태 토글해주는 함수
@@ -271,10 +273,12 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
 
+    // 텍스트필드 활성화되지 않으면 border 컬러 수정하고 오른쪽 버튼 숨김
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.clear.cgColor
         hideButton(textField)
     }
+    
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         self.changeLoginButton()
