@@ -84,15 +84,8 @@
 		DD02DB7A2BCE627A008ACD16 /* TVING */ = {
 			isa = PBXGroup;
 			children = (
-				DD02DB7B2BCE627A008ACD16 /* AppDelegate.swift */,
-				DD02DB7D2BCE627A008ACD16 /* SceneDelegate.swift */,
-				DD02DBA82BCE640A008ACD16 /* Extension */,
-				DD02DB952BCE6404008ACD16 /* Fonts */,
-				DD02DB7F2BCE627A008ACD16 /* LoginViewController.swift */,
-				DD02DBB12BCEA936008ACD16 /* WelcomeViewController.swift */,
-				DD02DB842BCE627B008ACD16 /* Assets.xcassets */,
-				DD02DB862BCE627B008ACD16 /* LaunchScreen.storyboard */,
-				DD02DB892BCE627B008ACD16 /* Info.plist */,
+				DD44E4552BD91AE700258D29 /* Resource */,
+				DD44E4542BD91AD200258D29 /* Source */,
 			);
 			path = TVING;
 			sourceTree = "<group>";
@@ -121,6 +114,37 @@
 				DD02DBAF2BCE9564008ACD16 /* UIControl+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		DD44E4532BD91AB800258D29 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DD02DB7F2BCE627A008ACD16 /* LoginViewController.swift */,
+				DD02DBB12BCEA936008ACD16 /* WelcomeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		DD44E4542BD91AD200258D29 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				DD02DB7B2BCE627A008ACD16 /* AppDelegate.swift */,
+				DD02DB7D2BCE627A008ACD16 /* SceneDelegate.swift */,
+				DD02DB862BCE627B008ACD16 /* LaunchScreen.storyboard */,
+				DD44E4532BD91AB800258D29 /* ViewController */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		DD44E4552BD91AE700258D29 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				DD02DBA82BCE640A008ACD16 /* Extension */,
+				DD02DB952BCE6404008ACD16 /* Fonts */,
+				DD02DB842BCE627B008ACD16 /* Assets.xcassets */,
+				DD02DB892BCE627B008ACD16 /* Info.plist */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +310,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = TVING/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -343,6 +368,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = TVING/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -362,7 +388,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2DF5SKQK2R;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TVING/Info.plist;
+				INFOPLIST_FILE = TVING/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -389,7 +415,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2DF5SKQK2R;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TVING/Info.plist;
+				INFOPLIST_FILE = TVING/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
