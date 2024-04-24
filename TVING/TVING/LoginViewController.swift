@@ -32,12 +32,12 @@ final class LoginViewController: UIViewController {
         $0.placeholder = "아이디"
         $0.attributedPlaceholder = NSAttributedString(
             string: $0.placeholder!, 
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.Gray02!])
-        $0.textColor = .Gray02
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray02])
+        $0.textColor = UIColor.gray02
         $0.font = UIFont.font(.pretendardSemiBold, ofSize: 15)
         $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 22, height: $0.frame.height))
         $0.leftViewMode = .always
-        $0.backgroundColor = .Gray04
+        $0.backgroundColor = UIColor.gray04
         $0.layer.cornerRadius = 3
         $0.autocorrectionType = .no // 수정 제안 끄도록 설정
         $0.spellCheckingType = .no
@@ -53,13 +53,13 @@ final class LoginViewController: UIViewController {
         $0.placeholder = "비밀번호"
         $0.attributedPlaceholder = NSAttributedString(
             string: $0.placeholder!,
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.Gray02!])
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray02])
         $0.isSecureTextEntry = true
-        $0.textColor = .Gray02
+        $0.textColor = UIColor.gray02
         $0.font = UIFont.font(.pretendardSemiBold, ofSize: 15)
         $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 22, height: $0.frame.height))
         $0.leftViewMode = .always
-        $0.backgroundColor = .Gray04
+        $0.backgroundColor = UIColor.gray04
         $0.layer.cornerRadius = 3
         $0.autocorrectionType = .no // 수정 제안 끄도록 설정
         $0.spellCheckingType = .no
@@ -83,40 +83,40 @@ final class LoginViewController: UIViewController {
         $0.layer.cornerRadius = 4
         $0.layer.borderWidth = 1
         $0.isEnabled = false
-        $0.setTitleColor(.Gray02, for: .disabled)
+        $0.setTitleColor(UIColor.gray02, for: .disabled)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = $0.isEnabled ? .accent : .black
-        $0.layer.borderColor = $0.isEnabled ? UIColor.clear.cgColor : UIColor.Gray04?.cgColor
+        $0.layer.borderColor = $0.isEnabled ? UIColor.clear.cgColor : UIColor.gray04.cgColor
         $0.addTarget(self, action: #selector(didLoginButtonTapped), for: .touchUpInside)
     }
     
     private lazy var findIdButton: UIButton = UIButton().then {
         $0.setTitle("아이디 찾기", for: .normal)
-        $0.setTitleColor(.Gray02, for: .normal)
+        $0.setTitleColor(UIColor.gray02, for: .normal)
         $0.titleLabel?.font = UIFont.font(.pretendardSemiBold, ofSize: 14)
         $0.backgroundColor = .clear
     }
     
     private let seperateLine: UIView = UIView().then {
-        $0.backgroundColor = .Gray04
+        $0.backgroundColor = UIColor.gray02
     }
     
     private lazy var findPasswordButton: UIButton = UIButton().then {
         $0.setTitle("비밀번호 찾기", for: .normal)
-        $0.setTitleColor(.Gray02, for: .normal)
+        $0.setTitleColor(UIColor.gray02, for: .normal)
         $0.titleLabel?.font = UIFont.font(.pretendardSemiBold, ofSize: 14)
         $0.backgroundColor = .clear
     }
     
     private let getNicknameLabel: UILabel = UILabel().then {
         $0.text = "아직 계정이 없으신가요?"
-        $0.textColor = .Gray04
+        $0.textColor = UIColor.gray04
         $0.font = UIFont.font(.pretendardSemiBold, ofSize: 14)
     }
     
     private lazy var getNicknameButton: UIButton = UIButton().then {
         $0.setTitle("닉네임 만들러가기", for: .normal)
-        $0.setTitleColor(.Gray02, for: .normal)
+        $0.setTitleColor(UIColor.gray02, for: .normal)
         $0.titleLabel?.font = UIFont.font(.pretendardRegular, ofSize: 14)
         $0.underlineTitle(forTitle: "닉네임 만들러가기")
     }
@@ -226,7 +226,7 @@ final class LoginViewController: UIViewController {
     
     // MARK: 아이디, 비밀번호 TextField의 텍스트가 !isEmpty일 때 버튼 활성화
     private func changeLoginButton() {
-        if !isFieldsEmpty() {
+        if !isFieldEmpty() {
             loginButton.isEnabled = true
             loginButton.backgroundColor = .accent
             loginButton.layer.borderColor = UIColor.clear.cgColor
@@ -234,15 +234,17 @@ final class LoginViewController: UIViewController {
         else {
             loginButton.isEnabled = false
             loginButton.backgroundColor = .black
-            loginButton.layer.borderColor = UIColor.Gray04?.cgColor
+            loginButton.layer.borderColor = UIColor.gray04.cgColor
         }
     }
     
     // 버튼 활성화를 위해 TextField가 비어있는지 검사하는 함수
-    private func isFieldsEmpty() -> Bool {
-        if idTextField.hasText && passwordTextField.hasText { return false }
-        
-        return true
+    /// guard idTextField.hasText, passwordTextField.hasText else { return true }
+    /// return false
+    /// guard를 이용해서 위처럼 쓰는 방법도 있다
+
+    private func isFieldEmpty() -> Bool {
+        return !(idTextField.hasText && passwordTextField.hasText)
     }
     
     @objc
@@ -288,7 +290,7 @@ final class LoginViewController: UIViewController {
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.Gray02?.cgColor
+        textField.layer.borderColor = UIColor.gray02.cgColor
         
         return true
     }
@@ -296,34 +298,21 @@ extension LoginViewController: UITextFieldDelegate {
     // 텍스트필드 활성화되지 않으면 border 컬러 수정하고 오른쪽 버튼 숨김
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.clear.cgColor
-        hideButton(textField)
+        shouldButtonVisibleChange(textField)
     }
     
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         self.changeLoginButton()
-        
-        // 텍스트필드가 비어있지 않으면
-        if textField.hasText { exposeButton(textField) }
-        // 텍스트필드가 비어있으면
-        else { hideButton(textField) }
+        shouldButtonVisibleChange(textField)
     }
     
-    // 지금 편집하고 있는 텍스트필드가 가지고 있는 수정 버튼들을 나타나게 설정
-    func exposeButton(_ textField: UITextField) {
-        if textField == idTextField { idClearButton.isHidden = false }
+    // 텍스트필드의 상태에 따라 버튼 활성화 상태 변경
+    func shouldButtonVisibleChange(_ textField: UITextField) {
+        if textField == idTextField { idClearButton.isHidden = !textField.hasText }
         if textField == passwordTextField {
-            passwordClearButton.isHidden = false
-            maskButton.isHidden = false
-        }
-    }
-    
-    // 지금 편집하고 있는 텍스트필드가 가지고 있는 수정 버튼들을 사라지게 설정
-    func hideButton(_ textField: UITextField) {
-        if textField == idTextField { idClearButton.isHidden = true }
-        if textField == passwordTextField {
-            passwordClearButton.isHidden = true
-            maskButton.isHidden = true
+            passwordClearButton.isHidden = !textField.hasText
+            maskButton.isHidden = !textField.hasText
         }
     }
 }
