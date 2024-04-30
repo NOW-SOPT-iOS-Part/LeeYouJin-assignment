@@ -76,6 +76,7 @@ class ChannelCollectionViewCell: UICollectionViewCell {
         channelImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(95)
+            $0.width.equalTo(170)
         }
         
         rankLabel.snp.makeConstraints {

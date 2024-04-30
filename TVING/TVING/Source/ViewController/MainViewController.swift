@@ -9,8 +9,13 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    
+    // MARK: - Data
+    
     let contentDummy = Content.dummy()
     let channelDummy = Channel.dummy()
+    let segmentData = ["홈", "실시간", "TV프로그램", "영화", "파라마운트+"]
+    
     
     // MARK: - Component
     
@@ -34,13 +39,14 @@ class MainViewController: UIViewController {
         $0.contentMode = .scaleToFill
     }
     
-    final private lazy var mainSegmentedControl: MainSegmentedControl = MainSegmentedControl(frame: .zero).then {
-        $0.addTarget(self, action: #selector(didSegmentedControlChanged), for: .valueChanged)
-    }
-    
-    final private lazy var stickyMainSegmentedControl: MainSegmentedControl = MainSegmentedControl(frame: .zero).then {
-        $0.isHidden = true
-        $0.addTarget(self, action: #selector(didSegmentedControlChanged), for: .valueChanged)
+    final private let segmentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = 32
+        $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+    }).then {
+        $0.backgroundColor = .clear
+        $0.showsHorizontalScrollIndicator = false
+        $0.register(SegmentCollectionViewCell.self, forCellWithReuseIdentifier: SegmentCollectionViewCell.cellID)
     }
     
     final private let mainPosterView: UIImageView = UIImageView().then {
@@ -67,7 +73,7 @@ class MainViewController: UIViewController {
     final private lazy var contentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
-        $0.minimumInteritemSpacing = 10
+        $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     }).then {
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
@@ -93,7 +99,7 @@ class MainViewController: UIViewController {
     final private lazy var channelCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
-        $0.minimumInteritemSpacing = 10
+        $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     }).then {
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
@@ -119,7 +125,7 @@ class MainViewController: UIViewController {
     final private lazy var seriesCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
-        $0.minimumInteritemSpacing = 10
+        $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     }).then {
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
@@ -155,7 +161,7 @@ class MainViewController: UIViewController {
     final private lazy var movieCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
-        $0.minimumInteritemSpacing = 10
+        $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     }).then {
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
@@ -187,9 +193,9 @@ class MainViewController: UIViewController {
             firstAdImageView, secondAdImageView, movieLabel, moreMovieButton, movieCollectionView
         ].forEach { contentView.addSubview($0) }
         [
-            logoImageView, mirroringButton, profileImageView, mainSegmentedControl
+            logoImageView, mirroringButton, profileImageView, segmentCollectionView
         ].forEach { mainPosterView.addSubview($0) }
-        view.addSubview(stickyMainSegmentedControl)
+        view.addSubview(segmentCollectionView)
     }
     
     
@@ -227,9 +233,9 @@ class MainViewController: UIViewController {
             $0.leading.equalTo(logoImageView.snp.trailing).offset(186)
         }
         
-        mainSegmentedControl.snp.makeConstraints {
+        segmentCollectionView.snp.makeConstraints {
             $0.top.equalTo(logoImageView.snp.bottom).offset(15)
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(30)
         }
         
@@ -264,7 +270,7 @@ class MainViewController: UIViewController {
             $0.top.equalTo(channelLabel.snp.bottom).offset(13)
             $0.leading.equalTo(channelLabel)
             $0.trailing.equalToSuperview()
-            $0.height.equalTo(160)
+            $0.height.equalTo(166)
         }
         
         seriesLabel.snp.makeConstraints {
@@ -320,19 +326,11 @@ class MainViewController: UIViewController {
     
     final private func setUpDelegate() {
         [
-            contentCollectionView, channelCollectionView, seriesCollectionView, movieCollectionView
+            segmentCollectionView, contentCollectionView, channelCollectionView, seriesCollectionView, movieCollectionView
         ].forEach {
             $0.delegate = self
             $0.dataSource = self
         }
-    }
-    
-    
-    // MARK: - Function
-    
-    @objc
-    private func didSegmentedControlChanged() {
-        
     }
 }
 
@@ -342,6 +340,8 @@ class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == channelCollectionView { return channelDummy.count }
+        if collectionView == segmentCollectionView { return segmentData.count }
+        
         return contentDummy.count
     }
     
@@ -359,18 +359,17 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             return channelCell
         }
+        if collectionView == segmentCollectionView {
+            let segmentCell = collectionView.dequeueReusableCell(withReuseIdentifier: SegmentCollectionViewCell.cellID, for: indexPath) as? SegmentCollectionViewCell
+            
+            segmentCell?.textLabel.text = segmentData[indexPath.row]
+            
+            return segmentCell!
+        }
         
         contentCell?.contentImageView.image = contentDummy[indexPath.row].image
         contentCell?.contentLabel.text = contentDummy[indexPath.row].name
         
         return contentCell!
-    }
-    
-    /// 셀 별 사이즈 지정
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == channelCollectionView {
-            return CGSize(width: 169, height: collectionView.frame.height)
-        }
-        return CGSize(width: 98, height: collectionView.frame.height)
     }
 }

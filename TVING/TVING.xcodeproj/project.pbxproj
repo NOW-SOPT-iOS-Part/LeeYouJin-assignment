@@ -27,8 +27,8 @@
 		DD02DBAE2BCE7A43008ACD16 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02DBAD2BCE7A43008ACD16 /* UIButton+.swift */; };
 		DD02DBB02BCE9564008ACD16 /* UIControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02DBAF2BCE9564008ACD16 /* UIControl+.swift */; };
 		DD02DBB22BCEA936008ACD16 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02DBB12BCEA936008ACD16 /* WelcomeViewController.swift */; };
+		DD31670C2BE12C6900F8CEE2 /* SegmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD31670B2BE12C6900F8CEE2 /* SegmentCollectionViewCell.swift */; };
 		DD44E4582BD93AF900258D29 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44E4572BD93AF900258D29 /* MainViewController.swift */; };
-		DD44E45C2BD943A900258D29 /* MainSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44E45B2BD943A900258D29 /* MainSegmentedControl.swift */; };
 		DDEB19A12BE0B01B009A2F79 /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB19A02BE0B01B009A2F79 /* ContentCollectionViewCell.swift */; };
 		DDEB19A32BE0B16C009A2F79 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB19A22BE0B16C009A2F79 /* UIColor+.swift */; };
 		DDEB19A52BE0B463009A2F79 /* ChannelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB19A42BE0B463009A2F79 /* ChannelCollectionViewCell.swift */; };
@@ -57,8 +57,8 @@
 		DD02DBAD2BCE7A43008ACD16 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		DD02DBAF2BCE9564008ACD16 /* UIControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+.swift"; sourceTree = "<group>"; };
 		DD02DBB12BCEA936008ACD16 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		DD31670B2BE12C6900F8CEE2 /* SegmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD44E4572BD93AF900258D29 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		DD44E45B2BD943A900258D29 /* MainSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSegmentedControl.swift; sourceTree = "<group>"; };
 		DDEB19A02BE0B01B009A2F79 /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDEB19A22BE0B16C009A2F79 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		DDEB19A42BE0B463009A2F79 /* ChannelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -171,6 +171,7 @@
 			children = (
 				DDEB19A02BE0B01B009A2F79 /* ContentCollectionViewCell.swift */,
 				DDEB19A42BE0B463009A2F79 /* ChannelCollectionViewCell.swift */,
+				DD31670B2BE12C6900F8CEE2 /* SegmentCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -178,7 +179,6 @@
 		DDEB19A62BE0B864009A2F79 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DD44E45B2BD943A900258D29 /* MainSegmentedControl.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -281,9 +281,9 @@
 			files = (
 				DD02DBAB2BCE640A008ACD16 /* UIFont+.swift in Sources */,
 				DD02DBB22BCEA936008ACD16 /* WelcomeViewController.swift in Sources */,
-				DD44E45C2BD943A900258D29 /* MainSegmentedControl.swift in Sources */,
 				DD02DBAE2BCE7A43008ACD16 /* UIButton+.swift in Sources */,
 				DDEB19A32BE0B16C009A2F79 /* UIColor+.swift in Sources */,
+				DD31670C2BE12C6900F8CEE2 /* SegmentCollectionViewCell.swift in Sources */,
 				DDEB19A12BE0B01B009A2F79 /* ContentCollectionViewCell.swift in Sources */,
 				DDEB19A52BE0B463009A2F79 /* ChannelCollectionViewCell.swift in Sources */,
 				DDEB19AD2BE0C0C3009A2F79 /* Channel.swift in Sources */,

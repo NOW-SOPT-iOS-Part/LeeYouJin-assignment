@@ -54,7 +54,7 @@ class ContentCollectionViewCell: UICollectionViewCell {
     
     private func setUpConstraint() {
         contentImageView.snp.makeConstraints {
-            $0.top.leading.equalToSuperview()
+            $0.top.leading.trailing.equalToSuperview()
             $0.width.equalTo(98)
             $0.height.equalTo(146)
         }
@@ -63,6 +63,7 @@ class ContentCollectionViewCell: UICollectionViewCell {
             $0.top.equalTo(contentImageView.snp.bottom).offset(7)
             $0.leading.equalToSuperview().offset(2)
             $0.bottom.equalToSuperview()
+            $0.width.equalTo(98)
         }
     }
 }
