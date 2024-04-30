@@ -27,6 +27,13 @@
 		DD02DBAE2BCE7A43008ACD16 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02DBAD2BCE7A43008ACD16 /* UIButton+.swift */; };
 		DD02DBB02BCE9564008ACD16 /* UIControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02DBAF2BCE9564008ACD16 /* UIControl+.swift */; };
 		DD02DBB22BCEA936008ACD16 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02DBB12BCEA936008ACD16 /* WelcomeViewController.swift */; };
+		DD44E4582BD93AF900258D29 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44E4572BD93AF900258D29 /* MainViewController.swift */; };
+		DD44E45C2BD943A900258D29 /* MainSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44E45B2BD943A900258D29 /* MainSegmentedControl.swift */; };
+		DDEB19A12BE0B01B009A2F79 /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB19A02BE0B01B009A2F79 /* ContentCollectionViewCell.swift */; };
+		DDEB19A32BE0B16C009A2F79 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB19A22BE0B16C009A2F79 /* UIColor+.swift */; };
+		DDEB19A52BE0B463009A2F79 /* ChannelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB19A42BE0B463009A2F79 /* ChannelCollectionViewCell.swift */; };
+		DDEB19A92BE0C064009A2F79 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB19A82BE0C064009A2F79 /* Content.swift */; };
+		DDEB19AD2BE0C0C3009A2F79 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB19AC2BE0C0C3009A2F79 /* Channel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +57,13 @@
 		DD02DBAD2BCE7A43008ACD16 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		DD02DBAF2BCE9564008ACD16 /* UIControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+.swift"; sourceTree = "<group>"; };
 		DD02DBB12BCEA936008ACD16 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		DD44E4572BD93AF900258D29 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		DD44E45B2BD943A900258D29 /* MainSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSegmentedControl.swift; sourceTree = "<group>"; };
+		DDEB19A02BE0B01B009A2F79 /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
+		DDEB19A22BE0B16C009A2F79 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		DDEB19A42BE0B463009A2F79 /* ChannelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCollectionViewCell.swift; sourceTree = "<group>"; };
+		DDEB19A82BE0C064009A2F79 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
+		DDEB19AC2BE0C0C3009A2F79 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +126,7 @@
 				DD02DBA92BCE640A008ACD16 /* UIFont+.swift */,
 				DD02DBAD2BCE7A43008ACD16 /* UIButton+.swift */,
 				DD02DBAF2BCE9564008ACD16 /* UIControl+.swift */,
+				DDEB19A22BE0B16C009A2F79 /* UIColor+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -121,6 +136,7 @@
 			children = (
 				DD02DB7F2BCE627A008ACD16 /* LoginViewController.swift */,
 				DD02DBB12BCEA936008ACD16 /* WelcomeViewController.swift */,
+				DD44E4572BD93AF900258D29 /* MainViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -131,7 +147,10 @@
 				DD02DB7B2BCE627A008ACD16 /* AppDelegate.swift */,
 				DD02DB7D2BCE627A008ACD16 /* SceneDelegate.swift */,
 				DD02DB862BCE627B008ACD16 /* LaunchScreen.storyboard */,
+				DDEB19A72BE0C050009A2F79 /* Model */,
 				DD44E4532BD91AB800258D29 /* ViewController */,
+				DDEB19A62BE0B864009A2F79 /* View */,
+				DDEB199F2BE0AFBF009A2F79 /* Cell */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -145,6 +164,32 @@
 				DD02DB892BCE627B008ACD16 /* Info.plist */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		DDEB199F2BE0AFBF009A2F79 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DDEB19A02BE0B01B009A2F79 /* ContentCollectionViewCell.swift */,
+				DDEB19A42BE0B463009A2F79 /* ChannelCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DDEB19A62BE0B864009A2F79 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD44E45B2BD943A900258D29 /* MainSegmentedControl.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DDEB19A72BE0C050009A2F79 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DDEB19A82BE0C064009A2F79 /* Content.swift */,
+				DDEB19AC2BE0C0C3009A2F79 /* Channel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,11 +281,18 @@
 			files = (
 				DD02DBAB2BCE640A008ACD16 /* UIFont+.swift in Sources */,
 				DD02DBB22BCEA936008ACD16 /* WelcomeViewController.swift in Sources */,
+				DD44E45C2BD943A900258D29 /* MainSegmentedControl.swift in Sources */,
 				DD02DBAE2BCE7A43008ACD16 /* UIButton+.swift in Sources */,
+				DDEB19A32BE0B16C009A2F79 /* UIColor+.swift in Sources */,
+				DDEB19A12BE0B01B009A2F79 /* ContentCollectionViewCell.swift in Sources */,
+				DDEB19A52BE0B463009A2F79 /* ChannelCollectionViewCell.swift in Sources */,
+				DDEB19AD2BE0C0C3009A2F79 /* Channel.swift in Sources */,
+				DDEB19A92BE0C064009A2F79 /* Content.swift in Sources */,
 				DD02DB802BCE627A008ACD16 /* LoginViewController.swift in Sources */,
 				DD02DBB02BCE9564008ACD16 /* UIControl+.swift in Sources */,
 				DD02DB7C2BCE627A008ACD16 /* AppDelegate.swift in Sources */,
 				DD02DB7E2BCE627A008ACD16 /* SceneDelegate.swift in Sources */,
+				DD44E4582BD93AF900258D29 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

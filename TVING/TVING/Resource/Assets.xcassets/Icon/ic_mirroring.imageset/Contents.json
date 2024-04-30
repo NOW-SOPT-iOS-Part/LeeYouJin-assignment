@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_mirroring_none.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -13,13 +13,6 @@ import Then
 final class LoginViewController: UIViewController {
     
     
-    // MARK: - Variables
-    
-    typealias handler = ((String) -> (Void))
-    
-    var completionHandler: handler?
-    
-    
     // MARK: - Components
     
     private let loginLabel: UILabel = UILabel().then {
