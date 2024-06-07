@@ -7,39 +7,43 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+import SnapKit
+import Then
+import Moya
+
+final class MainViewController: UIViewController {
     
     
     // MARK: - Data
     
-    let contentDummy = Content.dummy()
+    var contentData = [Content]()
     let channelDummy = Channel.dummy()
     let segmentData = ["홈", "실시간", "TV프로그램", "영화", "파라마운트+"]
     
     
     // MARK: - Component
     
-    final private let scrollView = UIScrollView().then {
+    private let scrollView = UIScrollView().then {
         $0.backgroundColor = .black
     }
     
-    final private let contentView = UIView()
+    private let contentView = UIView()
     
-    final private let logoImageView: UIImageView = UIImageView().then {
+    private let logoImageView: UIImageView = UIImageView().then {
         $0.image = .mainLogo
         $0.contentMode = .scaleAspectFit
     }
     
-    final private let mirroringButton: UIButton = UIButton().then {
+    private let mirroringButton: UIButton = UIButton().then {
         $0.setImage(.icMirroring, for: .normal)
     }
     
-    final private let profileImageView: UIImageView = UIImageView().then {
+    private let profileImageView: UIImageView = UIImageView().then {
         $0.image = .basicProfile
         $0.contentMode = .scaleToFill
     }
     
-    final private let segmentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    private let segmentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 32
         $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -49,18 +53,18 @@ class MainViewController: UIViewController {
         $0.register(SegmentCollectionViewCell.self, forCellWithReuseIdentifier: SegmentCollectionViewCell.cellID)
     }
     
-    final private let mainPosterView: UIImageView = UIImageView().then {
+    private let mainPosterView: UIImageView = UIImageView().then {
         $0.image = .mainPoster
         $0.contentMode = .scaleAspectFill
     }
     
-    final private let contentLabel: UILabel = UILabel().then {
+    private let contentLabel: UILabel = UILabel().then {
         $0.font = UIFont.font(.applegothicSemibold, ofSize: 15)
         $0.textColor = .white
         $0.text = "티빙에서 꼭 봐야하는 컨텐츠"
     }
     
-    final private lazy var moreContentButton: UIButton = UIButton().then {
+    private lazy var moreContentButton: UIButton = UIButton().then {
         $0.setTitle("전체보기", for: .normal)
         $0.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         $0.tintColor = .white
@@ -70,7 +74,7 @@ class MainViewController: UIViewController {
         $0.semanticContentAttribute = .forceRightToLeft
     }
     
-    final private lazy var contentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    private lazy var contentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
         $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -80,13 +84,13 @@ class MainViewController: UIViewController {
         $0.register(ContentCollectionViewCell.self, forCellWithReuseIdentifier: ContentCollectionViewCell.cellID)
     }
     
-    final private let channelLabel: UILabel = UILabel().then {
+    private let channelLabel: UILabel = UILabel().then {
         $0.font = UIFont.font(.applegothicSemibold, ofSize: 15)
         $0.textColor = .white
         $0.text = "인기 LIVE 채널"
     }
     
-    final private lazy var moreChannelButton: UIButton = UIButton().then {
+    private lazy var moreChannelButton: UIButton = UIButton().then {
         $0.setTitle("전체보기", for: .normal)
         $0.tintColor = .white
         $0.setTitleColor(UIColor(hexCode: "9C9C9C"), for: .normal)
@@ -96,7 +100,7 @@ class MainViewController: UIViewController {
         $0.semanticContentAttribute = .forceRightToLeft
     }
     
-    final private lazy var channelCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    private lazy var channelCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
         $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -106,13 +110,13 @@ class MainViewController: UIViewController {
         $0.register(ChannelCollectionViewCell.self, forCellWithReuseIdentifier: ChannelCollectionViewCell.cellID)
     }
     
-    final private let seriesLabel: UILabel = UILabel().then {
+    private let seriesLabel: UILabel = UILabel().then {
         $0.font = UIFont.font(.applegothicSemibold, ofSize: 15)
         $0.textColor = .white
         $0.text = "1화 무료! 파라마운트+ 인기 시리즈"
     }
     
-    final private lazy var moreSeriesButton: UIButton = UIButton().then {
+    private lazy var moreSeriesButton: UIButton = UIButton().then {
         $0.setTitle("전체보기", for: .normal)
         $0.tintColor = .white
         $0.setTitleColor(UIColor(hexCode: "9C9C9C"), for: .normal)
@@ -122,7 +126,7 @@ class MainViewController: UIViewController {
         $0.semanticContentAttribute = .forceRightToLeft
     }
     
-    final private lazy var seriesCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    private lazy var seriesCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
         $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -132,23 +136,23 @@ class MainViewController: UIViewController {
         $0.register(ContentCollectionViewCell.self, forCellWithReuseIdentifier: ContentCollectionViewCell.cellID)
     }
     
-    final private let firstAdImageView: UIImageView = UIImageView().then {
+    private let firstAdImageView: UIImageView = UIImageView().then {
         $0.image = .firstAD
         $0.contentMode = .scaleAspectFill
     }
     
-    final private let secondAdImageView: UIImageView = UIImageView().then {
+    private let secondAdImageView: UIImageView = UIImageView().then {
         $0.image = .secondAD
         $0.contentMode = .scaleAspectFill
     }
     
-    final private let movieLabel: UILabel = UILabel().then {
+    private let movieLabel: UILabel = UILabel().then {
         $0.font = UIFont.font(.applegothicSemibold, ofSize: 15)
         $0.textColor = .white
         $0.text = "티빙에서 꼭 봐야하는 컨텐츠"
     }
     
-    final private lazy var moreMovieButton: UIButton = UIButton().then {
+    private lazy var moreMovieButton: UIButton = UIButton().then {
         $0.setTitle("전체보기", for: .normal)
         $0.tintColor = .white
         $0.setTitleColor(UIColor(hexCode: "9C9C9C"), for: .normal)
@@ -158,7 +162,7 @@ class MainViewController: UIViewController {
         $0.semanticContentAttribute = .forceRightToLeft
     }
     
-    final private lazy var movieCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    private lazy var movieCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
         $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -171,6 +175,12 @@ class MainViewController: UIViewController {
     
     // MARK: - ViewDidLoad()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getBoxOfficeList()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -182,7 +192,8 @@ class MainViewController: UIViewController {
     
     // MARK: - setUpLayout()
     
-    final private func setUpLayout() {
+    private func setUpLayout() {
+        print(contentData)
         view.backgroundColor = .white
         
         view.addSubview(scrollView)
@@ -195,13 +206,12 @@ class MainViewController: UIViewController {
         [
             logoImageView, mirroringButton, profileImageView, segmentCollectionView
         ].forEach { mainPosterView.addSubview($0) }
-        view.addSubview(segmentCollectionView)
     }
     
     
     // MARK: - setUpConstraint()
     
-    final private func setUpConstraint() {
+    private func setUpConstraint() {
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -324,12 +334,38 @@ class MainViewController: UIViewController {
     
     // MARK: - setUpDelegate()
     
-    final private func setUpDelegate() {
+    private func setUpDelegate() {
         [
             segmentCollectionView, contentCollectionView, channelCollectionView, seriesCollectionView, movieCollectionView
         ].forEach {
             $0.delegate = self
             $0.dataSource = self
+        }
+    }
+    
+    
+    // MARK: - getBoxOfficeList()
+    
+    private func getBoxOfficeList() {
+        let provider = MoyaProvider<WeeklyBoxOfficeAPI>()
+        
+        provider.request(.weekly) { [self] result in
+            switch result {
+            case let .success(result):
+                let result = try? result.map(WeeklyResponseModel.self)
+                guard let movieList = result?.boxOfficeResult.weeklyBoxOfficeList else { return }
+                
+                for movie in movieList {
+                    self.contentData.append(Content(image: .mainPoster, name: movie.movieNm))
+                }
+                
+                [
+                    self.contentCollectionView, seriesCollectionView, movieCollectionView
+                ].forEach { $0.reloadData() }
+                
+            case .failure(_):
+                print("오류")
+            }
         }
     }
 }
@@ -342,7 +378,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if collectionView == channelCollectionView { return channelDummy.count }
         if collectionView == segmentCollectionView { return segmentData.count }
         
-        return contentDummy.count
+        return contentData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -367,8 +403,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return segmentCell!
         }
         
-        contentCell?.contentImageView.image = contentDummy[indexPath.row].image
-        contentCell?.contentLabel.text = contentDummy[indexPath.row].name
+        contentCell?.contentImageView.image = contentData[indexPath.row].image
+        contentCell?.contentLabel.text = contentData[indexPath.row].name
         
         return contentCell!
     }
