@@ -85,7 +85,6 @@ final class WelcomeViewController: UIViewController {
             object: nil,
             queue: nil) { result in
                 let id = result.object as! String
-                print("killkill")
                 self.welcomeLabel.text = "\(id)님\n 반가워요!"
         }
     }

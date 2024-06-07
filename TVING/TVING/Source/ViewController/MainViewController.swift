@@ -14,12 +14,7 @@ import Moya
 final class MainViewController: UIViewController {
     
     
-    // MARK: - Data
-    
-    var contentData = [Content]()
-    let channelDummy = Channel.dummy()
-    let segmentData = ["홈", "실시간", "TV프로그램", "영화", "파라마운트+"]
-    
+    var mainViewModel = MainViewModel()
     
     // MARK: - Component
     
@@ -43,11 +38,12 @@ final class MainViewController: UIViewController {
         $0.contentMode = .scaleToFill
     }
     
-    private let segmentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    let segmentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 32
         $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     }).then {
+        $0.tag = 3
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
         $0.register(SegmentCollectionViewCell.self, forCellWithReuseIdentifier: SegmentCollectionViewCell.cellID)
@@ -74,11 +70,12 @@ final class MainViewController: UIViewController {
         $0.semanticContentAttribute = .forceRightToLeft
     }
     
-    private lazy var contentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    lazy var contentCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
         $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     }).then {
+        $0.tag = 1
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
         $0.register(ContentCollectionViewCell.self, forCellWithReuseIdentifier: ContentCollectionViewCell.cellID)
@@ -100,11 +97,12 @@ final class MainViewController: UIViewController {
         $0.semanticContentAttribute = .forceRightToLeft
     }
     
-    private lazy var channelCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    lazy var channelCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
         $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     }).then {
+        $0.tag = 2
         $0.backgroundColor = .clear
         $0.showsHorizontalScrollIndicator = false
         $0.register(ChannelCollectionViewCell.self, forCellWithReuseIdentifier: ChannelCollectionViewCell.cellID)
@@ -126,7 +124,7 @@ final class MainViewController: UIViewController {
         $0.semanticContentAttribute = .forceRightToLeft
     }
     
-    private lazy var seriesCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    lazy var seriesCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
         $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -162,7 +160,7 @@ final class MainViewController: UIViewController {
         $0.semanticContentAttribute = .forceRightToLeft
     }
     
-    private lazy var movieCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    lazy var movieCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 10
         $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -178,7 +176,7 @@ final class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        getBoxOfficeList()
+        self.mainViewModel.getBoxOfficeList([self.contentCollectionView, self.seriesCollectionView, self.movieCollectionView])
     }
     
     override func viewDidLoad() {
@@ -193,7 +191,7 @@ final class MainViewController: UIViewController {
     // MARK: - setUpLayout()
     
     private func setUpLayout() {
-        print(contentData)
+        print(mainViewModel.contentData)
         view.backgroundColor = .white
         
         view.addSubview(scrollView)
@@ -342,32 +340,6 @@ final class MainViewController: UIViewController {
             $0.dataSource = self
         }
     }
-    
-    
-    // MARK: - getBoxOfficeList()
-    
-    private func getBoxOfficeList() {
-        let provider = MoyaProvider<WeeklyBoxOfficeAPI>()
-        
-        provider.request(.weekly) { [self] result in
-            switch result {
-            case let .success(result):
-                let result = try? result.map(WeeklyResponseModel.self)
-                guard let movieList = result?.boxOfficeResult.weeklyBoxOfficeList else { return }
-                
-                for movie in movieList {
-                    self.contentData.append(Content(image: .mainPoster, name: movie.movieNm))
-                }
-                
-                [
-                    self.contentCollectionView, seriesCollectionView, movieCollectionView
-                ].forEach { $0.reloadData() }
-                
-            case .failure(_):
-                print("오류")
-            }
-        }
-    }
 }
 
 
@@ -375,37 +347,10 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == channelCollectionView { return channelDummy.count }
-        if collectionView == segmentCollectionView { return segmentData.count }
-        
-        return contentData.count
+        return mainViewModel.countCollectionView(collectionView)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentCollectionViewCell.cellID, for: indexPath) as? ContentCollectionViewCell
-        
-        if collectionView == channelCollectionView {
-            let channelCell = (collectionView.dequeueReusableCell(withReuseIdentifier: ChannelCollectionViewCell.cellID, for: indexPath) as? ChannelCollectionViewCell)!
-            
-            channelCell.channelImageView.image = channelDummy[indexPath.row].image
-            channelCell.channelLabel.text = channelDummy[indexPath.row].channel
-            channelCell.contentLabel.text = channelDummy[indexPath.row].content
-            channelCell.rankLabel.text = channelDummy[indexPath.row].rank
-            channelCell.ratingLabel.text = channelDummy[indexPath.row].rating
-            
-            return channelCell
-        }
-        if collectionView == segmentCollectionView {
-            let segmentCell = collectionView.dequeueReusableCell(withReuseIdentifier: SegmentCollectionViewCell.cellID, for: indexPath) as? SegmentCollectionViewCell
-            
-            segmentCell?.textLabel.text = segmentData[indexPath.row]
-            
-            return segmentCell!
-        }
-        
-        contentCell?.contentImageView.image = contentData[indexPath.row].image
-        contentCell?.contentLabel.text = contentData[indexPath.row].name
-        
-        return contentCell!
+        return mainViewModel.bindCollectionViewData(collectionView, indexPath)
     }
 }
