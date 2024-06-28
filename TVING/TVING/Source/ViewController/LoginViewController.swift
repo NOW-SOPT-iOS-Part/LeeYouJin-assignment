@@ -15,13 +15,15 @@ final class LoginViewController: UIViewController {
     
     // MARK: - Components
     
+    private let loginViewModel = LoginViewModel()
+    
     private let loginLabel: UILabel = UILabel().then {
         $0.text = "TVING ID 로그인"
         $0.textColor = .white
         $0.font = UIFont.font(.pretendardMedium, ofSize: 23)
     }
     
-    private lazy var idTextField: UITextField = UITextField().then {
+    lazy var idTextField: UITextField = UITextField().then {
         $0.placeholder = "아이디"
         $0.attributedPlaceholder = NSAttributedString(
             string: $0.placeholder!, 
@@ -42,7 +44,7 @@ final class LoginViewController: UIViewController {
         $0.addTarget(self, action: #selector(didIdClearButtonTapped), for: .touchUpInside)
     }
     
-    private lazy var passwordTextField: UITextField = UITextField().then {
+    lazy var passwordTextField: UITextField = UITextField().then {
         $0.placeholder = "비밀번호"
         $0.attributedPlaceholder = NSAttributedString(
             string: $0.placeholder!,
@@ -217,24 +219,7 @@ final class LoginViewController: UIViewController {
         }
     }
     
-    // MARK: 아이디, 비밀번호 TextField의 텍스트가 !isEmpty일 때 버튼 활성화
-    private func changeLoginButton() {
-        if !isFieldEmpty() {
-            loginButton.isEnabled = true
-            loginButton.backgroundColor = .accent
-            loginButton.layer.borderColor = UIColor.clear.cgColor
-        }
-        else {
-            loginButton.isEnabled = false
-            loginButton.backgroundColor = .black
-            loginButton.layer.borderColor = UIColor.gray04.cgColor
-        }
-    }
-    
     // 버튼 활성화를 위해 TextField가 비어있는지 검사하는 함수
-    /// guard idTextField.hasText, passwordTextField.hasText else { return true }
-    /// return false
-    /// guard를 이용해서 위처럼 쓰는 방법도 있다
 
     private func isFieldEmpty() -> Bool {
         return !(idTextField.hasText && passwordTextField.hasText)
@@ -242,40 +227,23 @@ final class LoginViewController: UIViewController {
     
     @objc
     private func didLoginButtonTapped() {
-        let welcomeVC = WelcomeViewController()
-        
-        // WelcomeVC에서 NotificationCenter로 id 데이터 받을 옵저버 등록
-        welcomeVC.receivedData()
-        
-        // NotificationCenter로 id 데이터 post
-        NotificationCenter.default.post(
-            name: NSNotification.Name("id"),
-            object: idTextField.text
-        )
-        
-        welcomeVC.modalPresentationStyle = .fullScreen
-        
-        self.present(welcomeVC, animated: true)
+        loginViewModel.pushToWelcomeVC(self)
     }
     
-    // idTextField 클리어하는 함수
     @objc
     private func didIdClearButtonTapped() {
-        idTextField.text = ""
+        loginViewModel.clearValue(idTextField)
     }
     
-    // passwordTextField 클리어하는 함수
     @objc
     private func didPasswordClearButtonTapped() {
-        passwordTextField.text = ""
+        loginViewModel.clearValue(passwordTextField)
     }
     
     // 비밀번호 마스킹 상태 토글해주는 함수
     @objc
     private func didMaskButtonTapped() {
-        passwordTextField.isSecureTextEntry.toggle()
-        if passwordTextField.isSecureTextEntry { maskButton.setImage(.icEyeOff, for: .normal) }
-        else { maskButton.setImage(.icEyeOn, for: .normal) }
+        loginViewModel.updateMask(maskButton, passwordTextField)
     }
 }
 
@@ -296,7 +264,8 @@ extension LoginViewController: UITextFieldDelegate {
     
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        self.changeLoginButton()
+        loginViewModel.updateFieldValue(textField)
+        loginViewModel.updateLoginButtonStatus(loginButton)
         shouldButtonVisibleChange(textField)
     }
     
