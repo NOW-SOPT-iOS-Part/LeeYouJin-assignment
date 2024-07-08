@@ -32,7 +32,9 @@
 		DD02DBB22BCEA936008ACD16 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02DBB12BCEA936008ACD16 /* WelcomeViewController.swift */; };
 		DD31670C2BE12C6900F8CEE2 /* SegmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD31670B2BE12C6900F8CEE2 /* SegmentCollectionViewCell.swift */; };
 		DD44E4582BD93AF900258D29 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD44E4572BD93AF900258D29 /* MainViewController.swift */; };
-		DDE57D2C2C1307B000E18114 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE57D2B2C1307B000E18114 /* Secret.swift */; };
+		DD8130EB2C35A17000B93AE5 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8130EA2C35A17000B93AE5 /* Observable.swift */; };
+		DDA2EE712C35C813007C6059 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA2EE702C35C813007C6059 /* LoginView.swift */; };
+		DDAAB1402C2FFE550091BC7C /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAAB13F2C2FFE550091BC7C /* Secret.swift */; };
 		DDE57D2F2C13090000E18114 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE57D2E2C13090000E18114 /* LoginViewModel.swift */; };
 		DDE57D312C13246F00E18114 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE57D302C13246F00E18114 /* MainViewModel.swift */; };
 		DDEB19A12BE0B01B009A2F79 /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB19A02BE0B01B009A2F79 /* ContentCollectionViewCell.swift */; };
@@ -67,7 +69,9 @@
 		DD02DBB12BCEA936008ACD16 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		DD31670B2BE12C6900F8CEE2 /* SegmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD44E4572BD93AF900258D29 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		DDE57D2B2C1307B000E18114 /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
+		DD8130EA2C35A17000B93AE5 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		DDA2EE702C35C813007C6059 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		DDAAB13F2C2FFE550091BC7C /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		DDE57D2E2C13090000E18114 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		DDE57D302C13246F00E18114 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		DDEB19A02BE0B01B009A2F79 /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -91,14 +95,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DD0075832BED682F00178F78 /* Secret */ = {
-			isa = PBXGroup;
-			children = (
-				DDE57D2B2C1307B000E18114 /* Secret.swift */,
-			);
-			path = Secret;
-			sourceTree = "<group>";
-		};
 		DD0075862BED690A00178F78 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +174,7 @@
 				DDEB199F2BE0AFBF009A2F79 /* Cell */,
 				DDEB19A72BE0C050009A2F79 /* Model */,
 				DD44E4532BD91AB800258D29 /* ViewController */,
+				DDA2EE6F2C35C800007C6059 /* View */,
 				DDE57D2D2C1308C000E18114 /* ViewModel */,
 			);
 			path = Source;
@@ -186,14 +183,39 @@
 		DD44E4552BD91AE700258D29 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				DD8130D92C35970A00B93AE5 /* Observable */,
+				DDAAB13E2C2FFE550091BC7C /* Secret */,
 				DD0075862BED690A00178F78 /* Network */,
-				DD0075832BED682F00178F78 /* Secret */,
 				DD02DBA82BCE640A008ACD16 /* Extension */,
 				DD02DB952BCE6404008ACD16 /* Fonts */,
 				DD02DB842BCE627B008ACD16 /* Assets.xcassets */,
 				DD02DB892BCE627B008ACD16 /* Info.plist */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		DD8130D92C35970A00B93AE5 /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				DD8130EA2C35A17000B93AE5 /* Observable.swift */,
+			);
+			path = Observable;
+			sourceTree = "<group>";
+		};
+		DDA2EE6F2C35C800007C6059 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DDA2EE702C35C813007C6059 /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DDAAB13E2C2FFE550091BC7C /* Secret */ = {
+			isa = PBXGroup;
+			children = (
+				DDAAB13F2C2FFE550091BC7C /* Secret.swift */,
+			);
+			path = Secret;
 			sourceTree = "<group>";
 		};
 		DDE57D2D2C1308C000E18114 /* ViewModel */ = {
@@ -323,16 +345,18 @@
 				DD00757D2BED63FA00178F78 /* WeeklyResponseModel.swift in Sources */,
 				DDEB19A52BE0B463009A2F79 /* ChannelCollectionViewCell.swift in Sources */,
 				DDE57D2F2C13090000E18114 /* LoginViewModel.swift in Sources */,
+				DDAAB1402C2FFE550091BC7C /* Secret.swift in Sources */,
 				DDEB19AD2BE0C0C3009A2F79 /* Channel.swift in Sources */,
 				DDEB19A92BE0C064009A2F79 /* Content.swift in Sources */,
-				DDE57D2C2C1307B000E18114 /* Secret.swift in Sources */,
 				DD02DB802BCE627A008ACD16 /* LoginViewController.swift in Sources */,
 				DDE57D312C13246F00E18114 /* MainViewModel.swift in Sources */,
 				DD02DBB02BCE9564008ACD16 /* UIControl+.swift in Sources */,
+				DDA2EE712C35C813007C6059 /* LoginView.swift in Sources */,
 				DD0075882BED6B8A00178F78 /* WeeklyBoxOfficeAPI.swift in Sources */,
 				DD02DB7C2BCE627A008ACD16 /* AppDelegate.swift in Sources */,
 				DD02DB7E2BCE627A008ACD16 /* SceneDelegate.swift in Sources */,
 				DD44E4582BD93AF900258D29 /* MainViewController.swift in Sources */,
+				DD8130EB2C35A17000B93AE5 /* Observable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
